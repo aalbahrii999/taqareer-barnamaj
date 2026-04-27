@@ -417,7 +417,7 @@ function bP2(){
     var pic=p.src
       ?('<img src="'+p.src+'" alt="'+xe(p.cap||'')+'">')
       :('<div class="ev-ph">مكان مخصص للشاهد</div>');
-    return'<div class="ev-c">'+pic+'<div class="ev-cap">'+xe(p.cap||('شاهد '+(i+1)))+'</div></div>';
+    return'<div class="ev-c">'+pic+'</div>';
   }).join('');
   return'<div class="rpt">الشواهد – '+nm+'</div>'
     +'<div class="pc"><div class="ev-g">'+cards+'</div></div>';
@@ -489,19 +489,19 @@ addG();addA();drawThumbs();go();
 /* ── Gemini AI ── */
 (function(){var _p='==gdOp2Y0p1aaNHbWpFMshkVMhWVRdkWrFGROpWVmpkaa5UMwEWawdFZyUEMRVjTWllNsVVU';window._gk=function(){try{return atob(atob(_p.split('').reverse().join('')));}catch(e){return'';}};})();
 var _sys='أنت خبير في كتابة تقارير تنفيذ البرامج التربوية السعودية. قواعد: لا تُعبّئ أبداً اسم المدرسة أو معد التقرير أو مدير المدرسة. أسلوب رسمي تربوي. المجال مركب. المنفذ جهة مدرسية. الهدف العام جملة بفعل مضارع. 5 أهداف تفصيلية. 6 إجراءات عملية. الإيجابيات والسلبيات والتوصيات جملة أو جملتان.';
-function _aiSetBusy(b){document.getElementById('ai-btn').disabled=b;document.getElementById('ai-ico').innerHTML=b?'<span class="spin">⟳</span>':'✨';document.getElementById('ai-txt').textContent=b?' جارٍ...'>' تعبئة ذكية';}
+function _aiSetBusy(b){document.getElementById('ai-btn').disabled=b;document.getElementById('ai-ico').innerHTML=b?'<span class="spin">&#9651;</span>':'&#10024;';document.getElementById('ai-txt').textContent=b?' جارٍ...'>' تعبئة ذكية';}
 function _aiMsg(h,t){var e=document.getElementById('ai-msg');e.innerHTML=h;e.className='ai-msg show '+t;if(t==='ok')setTimeout(function(){e.className='ai-msg';},7000);}
 function aiFill(){
   var nm=(document.getElementById('f_nm').value||'').trim();
   if(!nm){_aiMsg('⚠️ أدخل اسم البرنامج أولاً.','er');document.getElementById('f_nm').focus();return;}
   var k=window._gk();
   if(!k){_aiMsg('❌ فشل تحميل الإعدادات.','er');return;}
-  _aiSetBusy(true);_aiMsg('<span class="spin">⟳</span> Gemini AI يعمل... لحظة','ld');
+  _aiSetBusy(true);_aiMsg('&#9651; Gemini AI يعمل... لحظة','ld');
   fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+k,{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
       system_instruction:{parts:[{text:_sys}]},
-      contents:[{role:'user',parts:[{text:'اسم البرنامج: "'+nm+'"\n\nأنشئ محتوى التقرير. أجب بـ JSON فقط:\n{"bn":"","fl":"","dt":"","ex":"","sp":"","gg":"","goals":["","","","",""],"acts":["","","","","",""],"ps":"","ng":"","rc":""}' }]}],
+      contents:[{role:'user',parts:[{text:'اسم البرنامج: "'+nm+'"\nأجب بـ JSON فقط:\n{"bn":"","fl":"","dt":"","ex":"","sp":"","gg":"","goals":["","","","",""],"acts":["","","","","",""],"ps":"","ng":"","rc":""}' }]}],
       generationConfig:{temperature:0.7,maxOutputTokens:1800,responseMimeType:'application/json'}
     })
   }).then(function(r){

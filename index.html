@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>تقارير البرامج التعليمية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f3ee;--card:#fffdf9;--brd:#d4d0c8;--txt:#1a1814;--mu:#777;--pri:#0b686d;--pl:#d4e8e7;--red:#8f3333;--pur:#5b2d8e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt)}
+button,input,textarea{font:inherit;color:inherit}
+.wrap{max-width:1400px;margin:0 auto;padding:12px;display:grid;gap:12px}
+.topbar{background:var(--card);border:1px solid var(--brd);border-radius:20px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;box-shadow:0 4px 20px rgba(0,0,0,.07)}
+.tt{font-size:1.05rem;font-weight:800}.ts{font-size:.77rem;color:var(--mu);margin-top:2px}
+.brow{display:flex;gap:8px;flex-wrap:wrap}
+.main{display:grid;grid-template-columns:380px 1fr;gap:12px;align-items:start}
+.card{background:var(--card);border:1px solid var(--brd);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.06);overflow:hidden}
+.card.st{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow-y:auto}
+.sec{padding:14px 16px;border-bottom:1px solid var(--brd)}.sec:last-child{border-bottom:0}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.sh h2{font-size:.95rem;font-weight:800;margin:0}
+.hint{font-size:.76rem;color:var(--mu);line-height:1.6;margin-bottom:10px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fd{display:grid;gap:4px}.fd label{font-size:.79rem;font-weight:700}
+.fd input,.fd textarea{border:1.5px solid var(--brd);border-radius:12px;padding:10px 12px;background:#fff;outline:none}
+.fd input:focus,.fd textarea:focus{border-color:var(--pri)}
+.fd textarea{min-height:80px;resize:vertical}
+.btn{height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--brd);background:var(--card);cursor:pointer;font-weight:700;font-size:.87rem;white-space:nowrap;transition:transform .1s}
+.btn:active{transform:scale(.96)}
+.btn.pri{background:var(--pri);color:#fff;border-color:transparent}
+.btn.sft{background:var(--pl);color:var(--pri);border-color:transparent}
+.btn.dng{color:var(--red)}
+.btn.ai{background:linear-gradient(135deg,var(--pur),var(--pri));color:#fff;border-color:transparent}
+.btn.ai:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.lgpair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lgcard{display:grid;gap:5px}.lgcard span{font-size:.79rem;font-weight:700}
+.lgbox{height:85px;border:2px dashed var(--brd);border-radius:12px;cursor:pointer;overflow:hidden;background:#fafaf8;display:flex;align-items:center;justify-content:center}
+.lgbox img{width:100%;height:100%;object-fit:contain}
+.lgph{font-size:.7rem;color:var(--mu);text-align:center;padding:6px;line-height:1.6}
+.ilist{display:grid;gap:6px}.ilbl{font-size:.76rem;font-weight:700;color:var(--mu);margin-bottom:2px}
+.irow{display:flex;gap:6px}.irow input{flex:1;border:1.5px solid var(--brd);border-radius:12px;padding:9px 12px;background:#fff;outline:none}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pcard{border:1px solid var(--brd);border-radius:12px;overflow:hidden}
+.pcard img{width:100%;height:88px;object-fit:cover;display:block}
+.pph{width:100%;height:88px;background:repeating-linear-gradient(45deg,#f2f2f2 0 8px,#e8e8e8 8px 16px);display:grid;place-items:center;font-size:.7rem;color:#999}
+.pcard input{border:0;border-top:1px solid var(--brd);padding:8px 10px;width:100%;background:transparent}
+.pst{font-size:.76rem;color:var(--mu)}
+.stogs{display:grid;gap:8px}
+.tog{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:14px;border:1.5px solid var(--brd);background:#fff;cursor:pointer}
+.tog.off{opacity:.5;background:#f8f6f1}.tog-lbl{font-size:.87rem;font-weight:700}
+.sw{width:42px;height:24px;border-radius:999px;background:#ccc;position:relative;flex:none;pointer-events:none}
+.sw::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;right:3px;transition:.2s}
+.sw.on{background:var(--pri)}.sw.on::after{right:auto;left:3px}
+.pvc{background:var(--card);border:1px solid var(--brd);border-radius:20px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.pvh{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.pvh h2{font-size:.95rem;font-weight:800}.pvp{display:grid;gap:14px;justify-items:center}
+.pvg{width:100%;max-width:640px;background:#fff;box-shadow:0 4px 24px rgba(0,0,0,.1);border-radius:4px;padding:18px}
+.ibox{background:var(--pl);padding:10px 14px;border-radius:14px;font-size:.81rem;line-height:1.85}
+.msg{display:none;padding:11px 14px;border-radius:12px;font-size:.82rem;font-weight:600;line-height:1.6;margin-top:6px}
+.msg.on{display:block}.msg.ld{background:#ede9f7;color:var(--pur)}.msg.ok{background:#e8f5e9;color:#2a6228}.msg.er{background:#fdecea;color:var(--red)}
+.spin{display:inline-block;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+#pov{display:none;position:fixed;inset:0;background:#f0ede6;z-index:9999;overflow-y:auto;flex-direction:column;align-items:center}
+#pov.on{display:flex}
+#povbar{width:100%;background:var(--pri);color:#fff;padding:14px 18px;text-align:center;position:sticky;top:0;z-index:10;display:grid;gap:6px}
+#povbar .pt{font-size:1.05rem;font-weight:800}
+#povbar .ps{font-size:.83rem;opacity:.9;line-height:1.65}
+#povbar .pb{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+#povbar button{height:40px;padding:0 18px;border-radius:999px;border:2px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;font:inherit;font-weight:700}
+#povbar button.act{background:#fff;color:var(--pri);border-color:transparent}
+.pp{width:100%;max-width:210mm;background:#fff;margin:16px 0;box-shadow:0 4px 24px rgba(0,0,0,.12)}
+@media print{
+  @page{size:A4 portrait;margin:12mm 12mm 14mm}
+  body>*{display:none!important}
+  #pov{display:flex!important;position:static!important;background:#fff!important;overflow:visible!important;padding:0!important}
+  #povbar{display:none!important}
+  .pp{page-break-after:always;margin:0!important;box-shadow:none!important;max-width:none!important;width:100%!important}
+  .pp:last-child{page-break-after:auto!important}
+  .ph-lbl{display:none!important}
+}
+.rp{font-family:'Cairo',sans-serif;direction:rtl;display:grid;gap:5mm;padding:12mm;background:#fff;color:#000}
+.ph{display:grid;grid-template-columns:65pt 1fr 65pt;align-items:center;gap:6pt;border-bottom:2pt solid #000;padding-bottom:7pt}
+.ph-lb{display:grid;justify-items:center;gap:3pt}
+.ph-box{width:56pt;height:56pt;border:1pt solid #ccc;border-radius:6pt;overflow:hidden;display:grid;place-items:center;background:#fafafa}
+.ph-box img{width:100%;height:100%;object-fit:contain}
+.ph-ph{font-size:7pt;color:#aaa;text-align:center;line-height:1.5}
+.ph-lbl{font-size:7.5pt;font-weight:700;color:#555;text-align:center}
+.ph-gov{text-align:center;font-size:10pt;font-weight:700;line-height:2}
+.rpt{text-align:center;font-size:16pt;font-weight:800}
+.inf{width:100%;border-collapse:collapse;font-size:9.5pt}
+.inf th,.inf td{border:1pt solid #000;padding:5pt 6pt;vertical-align:middle;line-height:1.8}
+.inf th{background:#ebebeb;font-weight:800;white-space:nowrap;width:80pt}
+.inf td{word-break:break-word;overflow-wrap:anywhere}
+.pc{border:1.2pt solid #000;border-radius:5pt;overflow:hidden}
+.pc-h{background:#e8e8e8;padding:4pt 8pt;font-size:10.5pt;font-weight:800;border-bottom:1.2pt solid #000}
+.pc-b{padding:6pt 8pt;font-size:9.5pt;line-height:1.95;word-break:break-word;overflow-wrap:anywhere}
+.pc-b ol{margin:0;padding-right:14pt;padding-left:0}.pc-b li{margin-bottom:2pt}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.ev-g{display:grid;grid-template-columns:1fr 1fr;gap:5mm;padding:5mm}
+.ev-c{border:1pt solid #000;border-radius:5pt;overflow:hidden}
+.ev-c img{width:100%;height:auto;max-height:180pt;object-fit:contain;display:block;background:#f8f8f8}
+.ev-ph{height:120pt;background:repeating-linear-gradient(45deg,#f2f2f2 0 10pt,#e8e8e8 10pt 20pt);display:grid;place-items:center;font-size:9pt;color:#999}
+.ev-cap{padding:4pt 7pt;font-size:9pt;text-align:center;border-top:1pt solid #000;font-weight:700}
+@media(max-width:1100px){.main{grid-template-columns:1fr}.card.st{position:static;max-height:none}}
+@media(max-width:640px){.g2,.lgpair,.pgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="pov">
+  <div id="povbar">
+    <div class="pt">📄 صفحات التقرير جاهزة</div>
+    <div class="ps">على الآيفون: اضغط <strong>↑ مشاركة</strong> ← <strong>طباعة</strong> ← <strong>حفظ PDF</strong></div>
+    <div class="pb">
+      <button onclick="closePov()">✕ إغلاق</button>
+      <button class="act" onclick="window.print()">🖨️ طباعة / PDF</button>
+    </div>
+  </div>
+  <div class="pp"><div class="rp" id="op1"></div></div>
+  <div class="pp" id="povp2"><div class="rp" id="op2"></div></div>
+</div>
+<div class="wrap">
+  <header class="topbar">
+    <div><div class="tt">📄 قالب تقارير البرامج التعليمية</div>
+    <div class="ts">✨ تعبئة ذكية بـ Gemini AI · تخصيص الأقسام · تصدير PDF</div></div>
+    <div class="brow">
+      <button class="btn" onclick="resetAll()">إعادة تعيين</button>
+      <button class="btn pri" onclick="doPrint()">📄 تصدير PDF</button>
+    </div>
+  </header>
+  <div class="main">
+    <div class="card st">
+      <div class="sec">
+        <div class="sh"><h2>🖼 الشعارات والترويسة</h2></div>
+        <div class="lgpair">
+          <div class="lgcard"><span>شعار الوزارة</span>
+            <div class="lgbox" id="lb_m" onclick="document.getElementById('fi_m').click()"><div class="lgph">اضغط لرفع الشعار</div></div>
+            <input type="file" id="fi_m" accept="image/*" style="display:none" onchange="loadLogo(this,'m')">
+          </div>
+          <div class="lgcard"><span>شعار المدرسة</span>
+            <div class="lgbox" id="lb_s" onclick="document.getElementById('fi_s').click()"><div class="lgph">اضغط لرفع الشعار</div></div>
+            <input type="file" id="fi_s" accept="image/*" style="display:none" onchange="loadLogo(this,'s')">
+          </div>
+        </div>
+        <div class="g2" style="margin-top:10px">
+          <div class="fd"><label>اسم المدرسة</label><input id="f_sch" value="مدرسة ابن المبارك الثانوية" oninput="go()"></div>
+          <div class="fd"><label>إدارة التعليم</label><input id="f_off" value="إدارة التعليم بالمنطقة الشرقية" oninput="go()"></div>
+          <div class="fd"><label>الجهة العليا</label><input id="f_min" value="وزارة التعليم" oninput="go()"></div>
+          <div class="fd"><label>الدولة</label><input id="f_ctr" value="المملكة العربية السعودية" oninput="go()"></div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="sh"><h2>📋 معلومات البرنامج</h2></div>
+        <div style="display:grid;gap:6px;margin-bottom:12px">
+          <label style="font-size:.79rem;font-weight:700">اسم البرنامج</label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input id="f_nm" oninput="go()" placeholder="مثال: اليوم الوطني، القراءة..." style="flex:1;border:1.5px solid var(--brd);border-radius:12px;padding:10px 12px;background:#fff;outline:none">
+            <button class="btn ai" id="aibtn" onclick="aiFill()"><span id="aiico">✨</span><span id="aitxt"> تعبئة ذكية</span></button>
+          </div>
+          <div class="msg" id="aimsg"></div>
+        </div>
+        <div class="g2">
+          <div class="fd"><label>المستفيدون</label><input id="f_bn" oninput="go()"></div>
+          <div class="fd"><label>المجال</label><input id="f_fl" oninput="go()"></div>
+          <div class="fd"><label>تاريخ التنفيذ</label><input id="f_dt" oninput="go()"></div>
+          <div class="fd"><label>المنفذ</label><input id="f_ex" oninput="go()"></div>
+          <div class="fd"><label>الجهة المساندة</label><input id="f_sp" oninput="go()"></div>
+          <div class="fd"><label>معد التقرير</label><input id="f_au" oninput="go()"></div>
+          <div class="fd"><label>مدير المدرسة</label><input id="f_pr" oninput="go()"></div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="sh"><h2>🎯 الأهداف</h2>
+          <div class="brow">
+            <button class="btn sft" onclick="addG()">+ هدف</button>
+            <button class="btn" onclick="addG();addG();addG()">+ 3</button>
+          </div>
+        </div>
+        <div class="fd" style="margin-bottom:8px">
+          <label>الهدف العام</label>
+          <textarea id="f_gg" oninput="go()" placeholder="اكتب الهدف العام للبرنامج"></textarea>
+        </div>
+        <div class="ilist" id="gl"></div>
+      </div>
+      <div class="sec">
+        <div class="sh"><h2>⚙️ إجراءات التنفيذ</h2>
+          <button class="btn sft" onclick="addA()">+ إجراء</button>
+        </div>
+        <div class="ilist" id="al"></div>
+      </div>
+      <div class="sec">
+        <div class="sh"><h2>📊 النتائج</h2></div>
+        <div style="display:grid;gap:8px">
+          <div class="fd"><label>الإيجابيات</label><textarea id="f_ps" oninput="go()"></textarea></div>
+          <div class="fd"><label>السلبيات</label><textarea id="f_ng" oninput="go()"></textarea></div>
+          <div class="fd"><label>التوصيات</label><textarea id="f_rc" oninput="go()"></textarea></div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="sh"><h2>🖼 صور الشواهد</h2></div>
+        <div style="display:grid;gap:8px">
+          <div class="fd"><label>رفع الصور</label><input type="file" accept="image/*" multiple id="fi_ev" onchange="loadPhotos(this)"></div>
+          <div class="brow">
+            <button class="btn sft" onclick="addSlot()">+ خانة فارغة</button>
+            <button class="btn dng" onclick="clearPhotos()">حذف الكل</button>
+          </div>
+          <div class="pst" id="pst">لا توجد صور.</div>
+          <div class="pgrid" id="pg"></div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="sh"><h2>🎛️ تخصيص الأقسام</h2></div>
+        <p class="hint">فعّل أو أوقف أي قسم ليظهر في التقرير النهائي.</p>
+        <div class="stogs">
+          <div class="tog on" id="tog_hdr" onclick="tog('hdr')"><span class="tog-lbl">🏫 الترويسة</span><div class="sw on" id="sw_hdr"></div></div>
+          <div class="tog on" id="tog_info" onclick="tog('info')"><span class="tog-lbl">📋 معلومات البرنامج</span><div class="sw on" id="sw_info"></div></div>
+          <div class="tog on" id="tog_goals" onclick="tog('goals')"><span class="tog-lbl">🎯 الأهداف</span><div class="sw on" id="sw_goals"></div></div>
+          <div class="tog on" id="tog_acts" onclick="tog('acts')"><span class="tog-lbl">⚙️ إجراءات التنفيذ</span><div class="sw on" id="sw_acts"></div></div>
+          <div class="tog on" id="tog_pos" onclick="tog('pos')"><span class="tog-lbl">✅ الإيجابيات</span><div class="sw on" id="sw_pos"></div></div>
+          <div class="tog on" id="tog_neg" onclick="tog('neg')"><span class="tog-lbl">⚠️ السلبيات</span><div class="sw on" id="sw_neg"></div></div>
+          <div class="tog on" id="tog_rec" onclick="tog('rec')"><span class="tog-lbl">💡 التوصيات</span><div class="sw on" id="sw_rec"></div></div>
+          <div class="tog on" id="tog_ev" onclick="tog('ev')"><span class="tog-lbl">🖼 صفحة الشواهد</span><div class="sw on" id="sw_ev"></div></div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="ibox">📌 <strong>تصدير PDF:</strong> اضغط 📄 تصدير ← <strong>↑ مشاركة ← طباعة ← حفظ PDF</strong></div>
+      </div>
+    </div>
+    <div class="pvc">
+      <div class="pvh"><h2>معاينة مباشرة</h2>
+        <div class="brow">
+          <button class="btn" onclick="saveJSON()">💾 JSON</button>
+          <button class="btn pri" onclick="doPrint()">📄 تصدير PDF</button>
+        </div>
+      </div>
+      <div class="pvp">
+        <div class="pvg"><div id="pv1"></div></div>
+        <div class="pvg" id="pvg2"><div id="pv2"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+var _a='==gdOp2Y0p1aaNHbWp',_b='FMshkVMhWVRdkWrFGR',_c='OpWVmpkaa5UMwEWawd',_d='FZyUEMRVjTWllNsVVU';
+function _gk(){try{return atob(atob((_a+_b+_c+_d).split('').reverse().join('')));}catch(e){return '';}}
+var SYS=`أنت خبير في كتابة تقارير تنفيذ البرامج التربوية لمدارس وزارة التعليم السعودية.
+نموذج مرجعي (برنامج تعزيز السلوك الإيجابي): المستفيدون: جميع الطلاب + أولياء الأمور + منسوبي المدرسة، المجال: سلوكي - تربوي - تحفيزي، المنفذ: التوجيه الطلابي، الهدف العام: نشر وتعزيز السلوكيات الإيجابية والحد من السلبية. الأهداف: غرس القيم الإسلامية، تحفيز الطلاب على الالتزام، تدريب الطلاب على مهارات التعاون والاحترام، إشراك الأسرة، تكريم الملتزمين. الإجراءات: حملات عبر الإذاعة، ورش عمل، تضمين القيم في الدروس، رصد السلوك، مسابقات صفية، تكريم دوري. الإيجابيات: ارتفاع الالتزام وزيادة التفاعل. السلبيات: ضعف مشاركة الأسر. التوصيات: تعزيز التنسيق مع الأسرة وتكثيف الحوافز.
+قواعد: أسلوب رسمي تربوي، المجال مركب (سلوكي-تربوي)، 5 أهداف تبدأ بفعل مضارع، 6 إجراءات عملية، الإيجابيات والسلبيات والتوصيات جملة أو جملتان لكل منها.`;
+var logos={m:'',s:''},goals=[],acts=[],photos=[],secs={hdr:1,info:1,goals:1,acts:1,pos:1,neg:1,rec:1,ev:1};
+function $(i){return document.getElementById(i);}
+function gv(i){var e=$(i);return e?e.value.trim():'';}
+function sv(i,v){var e=$(i);if(e)e.value=v;}
+function xe(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function b64(f){return new Promise(function(ok){var r=new FileReader();r.onload=function(){ok(r.result);};r.readAsDataURL(f);});}
+function setAI(on){$('aibtn').disabled=on;$('aiico').innerHTML=on?'<span class="spin">⟳</span>':'✨';$('aitxt').textContent=on?' جارٍ...'>' تعبئة ذكية';}
+function setMsg(m,t){var e=$('aimsg');e.innerHTML=m;e.className='msg on '+t;if(t==='ok')setTimeout(function(){e.className='msg';},6000);}
+async function aiFill(){
+  var nm=gv('f_nm');
+  if(!nm){setMsg('⚠️ أدخل اسم البرنامج أولاً','er');$('f_nm').focus();return;}
+  setAI(true);setMsg('<span class="spin">⟳</span> Gemini AI يولّد محتوى التقرير...','ld');
+  try{
+    var k=_gk();if(!k)throw new Error('خطأ في تحميل الإعدادات');
+    var um='أنشئ محتوى تقرير لبرنامج مدرسي اسمه: "'+nm+'"\nأجب بـ JSON فقط:\n{"bn":"","fl":"","dt":"","ex":"","sp":"","gg":"","goals":["","","","",""],"acts":["","","","","",""],"ps":"","ng":"","rc":""}';
+    var res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+k,
+      {method:'POST',headers:{'Content-Type':'application/json'},
+       body:JSON.stringify({system_instruction:{parts:[{text:SYS}]},contents:[{role:'user',parts:[{text:um}]}],generationConfig:{temperature:0.7,maxOutputTokens:1800,responseMimeType:'application/json'}})});
+    if(!res.ok){var er=await res.json().catch(function(){return {}});throw new Error((er.error&&er.error.message)||'HTTP '+res.status);}
+    var data=await res.json();
+    if(!data.candidates||!data.candidates.length)throw new Error('لم يُرجع الـ AI أي نتيجة');
+    var raw=data.candidates[0].content.parts[0].text;
+    var m=raw.match(/\{[\s\S]*\}/);
+    if(!m)throw new Error('صيغة الرد غير صحيحة');
+    var d=JSON.parse(m[0]);
+    sv('f_bn',d.bn||'');sv('f_fl',d.fl||'');sv('f_dt',d.dt||'');sv('f_ex',d.ex||'');sv('f_sp',d.sp||'');sv('f_gg',d.gg||'');sv('f_ps',d.ps||'');sv('f_ng',d.ng||'');sv('f_rc',d.rc||'');
+    $('gl').innerHTML='';goals=[];if(Array.isArray(d.goals))d.goals.forEach(function(g){if(g)addG(g);});
+    $('al').innerHTML='';acts=[];if(Array.isArray(d.acts))d.acts.forEach(function(a){if(a)addA(a);});
+    setMsg('✅ تمت التعبئة بنجاح — راجع وعدّل ما تشاء','ok');go();
+  }catch(e){console.error(e);setMsg('❌ '+e.message,'er');}
+  setAI(false);
+}
+function tog(k){secs[k]=secs[k]?0:1;$('tog_'+k).className=secs[k]?'tog on':'tog off';$('sw_'+k).className=secs[k]?'sw on':'sw';go();}
+function loadLogo(inp,key){var f=inp.files[0];if(!f)return;b64(f).then(function(src){logos[key]=src;$('lb_'+key).innerHTML='<img src="'+src+'" alt="">';go();});}
+function addItem(lid,lbl,ph,val){
+  var list=$(lid),wrap=document.createElement('div');
+  var l=document.createElement('div');l.className='ilbl';l.textContent=lbl+' '+(list.children.length+1);
+  var row=document.createElement('div');row.className='irow';
+  var inp=document.createElement('input');inp.type='text';inp.value=val||'';inp.placeholder=ph;inp.addEventListener('input',sync);
+  var del=document.createElement('button');del.className='btn dng';del.type='button';del.textContent='حذف';
+  del.addEventListener('click',function(){this.parentNode.parentNode.remove();sync();});
+  row.appendChild(inp);row.appendChild(del);wrap.appendChild(l);wrap.appendChild(row);list.appendChild(wrap);sync();
+}
+function addG(v){addItem('gl','الهدف','اكتب هدفاً',v);}
+function addA(v){addItem('al','الإجراء','اكتب إجراءً',v);}
+function sync(){
+  goals=Array.prototype.map.call(document.querySelectorAll('#gl input'),function(e){return e.value.trim();}).filter(Boolean);
+  acts=Array.prototype.map.call(document.querySelectorAll('#al input'),function(e){return e.value.trim();}).filter(Boolean);
+  var g=$('gl').children,a=$('al').children,i;
+  for(i=0;i<g.length;i++)g[i].querySelector('.ilbl').textContent='الهدف '+(i+1);
+  for(i=0;i<a.length;i++)a[i].querySelector('.ilbl').textContent='الإجراء '+(i+1);
+  go();
+}
+function loadPhotos(inp){
+  var files=Array.prototype.filter.call(inp.files,function(f){return f.type.startsWith('image/');});
+  Promise.all(files.map(function(f){return b64(f).then(function(src){photos.push({src:src,cap:f.name.replace(/\.[^.]+$/,'')})});})).then(drawThumbs);
+}
+function addSlot(){photos.push({src:'',cap:'شاهد '+(photos.length+1)});drawThumbs();}
+function clearPhotos(){photos=[];drawThumbs();}
+function drawThumbs(){
+  var g=$('pg');g.innerHTML='';
+  photos.forEach(function(p,i){
+    var c=document.createElement('div');c.className='pcard';
+    if(p.src){var img=document.createElement('img');img.src=p.src;c.appendChild(img);}
+    else{var ph=document.createElement('div');ph.className='pph';ph.textContent='لم ترفع صورة';c.appendChild(ph);}
+    var cap=document.createElement('input');cap.type='text';cap.value=p.cap||'';cap.placeholder='وصف';
+    (function(idx){cap.addEventListener('input',function(e){photos[idx].cap=e.target.value;go();})})(i);
+    c.appendChild(cap);g.appendChild(c);
+  });
+  $('pst').textContent=photos.length?photos.length+' صورة.':'لا توجد صور.';go();
+}
+function bHdr(){
+  if(!secs.hdr)return'';
+  var mi=logos.m?'<img src="'+logos.m+'" alt="">':'<div class="ph-ph">شعار<br>الوزارة</div>';
+  var si=logos.s?'<img src="'+logos.s+'" alt="">':'<div class="ph-ph">شعار<br>المدرسة</div>';
+  return'<div class="ph"><div class="ph-lb"><div class="ph-box">'+si+'</div><div class="ph-lbl">شعار المدرسة</div></div>'
+    +'<div class="ph-gov"><div>'+xe(gv('f_ctr')||'المملكة العربية السعودية')+'</div><div>'+xe(gv('f_min')||'وزارة التعليم')+'</div><div>'+xe(gv('f_off')||'إدارة التعليم')+'</div><div>'+xe(gv('f_sch')||'اسم المدرسة')+'</div></div>'
+    +'<div class="ph-lb"><div class="ph-box">'+mi+'</div><div class="ph-lbl">شعار الوزارة</div></div></div>';
+}
+function bInf(){
+  if(!secs.info)return'';
+  return'<div class="pc"><div class="pc-h">معلومات تنفيذ البرنامج</div><table class="inf"><tbody>'
+    +'<tr><th>اسم البرنامج</th><td>'+xe(gv('f_nm')||'—')+'</td><th>المستفيدون</th><td>'+xe(gv('f_bn')||'—')+'</td></tr>'
+    +'<tr><th>المجال</th><td>'+xe(gv('f_fl')||'—')+'</td><th>تاريخ التنفيذ</th><td>'+xe(gv('f_dt')||'—')+'</td></tr>'
+    +'<tr><th>المنفذ</th><td>'+xe(gv('f_ex')||'—')+'</td><th>الجهة المساندة</th><td>'+xe(gv('f_sp')||'—')+'</td></tr>'
+    +'<tr><th>معد التقرير</th><td>'+xe(gv('f_au')||'—')+'</td><th>مدير المدرسة</th><td>'+xe(gv('f_pr')||'—')+'</td></tr>'
+    +'</tbody></table></div>';
+}
+function bP1(){
+  var nm=xe(gv('f_nm')||'...........');
+  var h=bHdr()+'<div class="rpt">تقرير تنفيذ برنامج '+nm+'</div>'+bInf();
+  if(secs.goals){
+    var gl=goals.length?goals.map(function(g){return'<li>'+xe(g)+'</li>';}).join(''):'<li style="color:#aaa">—</li>';
+    h+='<div class="pc"><div class="pc-h">أهداف البرنامج</div><div class="pc-b"><strong>الهدف العام: </strong>'+xe(gv('f_gg')||'—')+'</div><div class="pc-b"><ol>'+gl+'</ol></div></div>';
+  }
+  if(secs.acts){
+    var al=acts.length?acts.map(function(a){return'<li>'+xe(a)+'</li>';}).join(''):'<li style="color:#aaa">—</li>';
+    h+='<div class="pc"><div class="pc-h">إجراءات تنفيذ البرنامج</div><div class="pc-b"><ol>'+al+'</ol></div></div>';
+  }
+  if(secs.pos&&secs.neg)h+='<div class="dual"><div class="pc"><div class="pc-h">الإيجابيات</div><div class="pc-b">'+xe(gv('f_ps')||'—')+'</div></div><div class="pc"><div class="pc-h">السلبيات</div><div class="pc-b">'+xe(gv('f_ng')||'—')+'</div></div></div>';
+  else if(secs.pos)h+='<div class="pc"><div class="pc-h">الإيجابيات</div><div class="pc-b">'+xe(gv('f_ps')||'—')+'</div></div>';
+  else if(secs.neg)h+='<div class="pc"><div class="pc-h">السلبيات</div><div class="pc-b">'+xe(gv('f_ng')||'—')+'</div></div>';
+  if(secs.rec)h+='<div class="pc"><div class="pc-h">التوصيات</div><div class="pc-b">'+xe(gv('f_rc')||'—')+'</div></div>';
+  return h;
+}
+function bP2(){
+  if(!secs.ev)return'';
+  var nm=xe(gv('f_nm')||'—');
+  var list=photos.length?photos:[{src:'',cap:'شاهد 1'},{src:'',cap:'شاهد 2'},{src:'',cap:'شاهد 3'},{src:'',cap:'شاهد 4'}];
+  var cards=list.map(function(p,i){
+    var pic=p.src?'<img src="'+p.src+'" alt="">':'<div class="ev-ph">مكان مخصص للشاهد</div>';
+    return'<div class="ev-c">'+pic+'<div class="ev-cap">'+xe(p.cap||('شاهد '+(i+1)))+'</div></div>';
+  }).join('');
+  return'<div class="rpt">الشواهد – '+nm+'</div><div class="pc"><div class="ev-g">'+cards+'</div></div>';
+}
+function go(){
+  var p1=bP1(),p2=bP2();
+  $('pv1').innerHTML=p1;$('pv2').innerHTML=p2;$('op1').innerHTML=p1;$('op2').innerHTML=p2;
+  $('pvg2').style.display=secs.ev?'':'none';$('povp2').style.display=secs.ev?'':'none';
+}
+function doPrint(){go();$('pov').classList.add('on');document.body.style.overflow='hidden';}
+function closePov(){$('pov').classList.remove('on');document.body.style.overflow='';}
+function resetAll(){
+  ['f_nm','f_bn','f_fl','f_dt','f_ex','f_sp','f_au','f_pr','f_gg','f_ps','f_ng','f_rc'].forEach(function(id){sv(id,'');});
+  $('gl').innerHTML='';$('al').innerHTML='';goals=[];acts=[];photos=[];logos={m:'',s:''};
+  $('lb_m').innerHTML='<div class="lgph">اضغط لرفع الشعار</div>';
+  $('lb_s').innerHTML='<div class="lgph">اضغط لرفع الشعار</div>';
+  Object.keys(secs).forEach(function(k){secs[k]=1;$('tog_'+k).className='tog on';$('sw_'+k).className='sw on';});
+  addG();addA();drawThumbs();go();
+}
+function saveJSON(){
+  var d={nm:gv('f_nm'),bn:gv('f_bn'),fl:gv('f_fl'),dt:gv('f_dt'),ex:gv('f_ex'),sp:gv('f_sp'),au:gv('f_au'),pr:gv('f_pr'),gg:gv('f_gg'),ps:gv('f_ps'),ng:gv('f_ng'),rc:gv('f_rc'),goals:goals,acts:acts};
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(d,null,2)],{type:'application/json'}));a.download='report.json';a.click();
+}
+addG();addA();drawThumbs();go();
+</script>
+</body>
+</html>
